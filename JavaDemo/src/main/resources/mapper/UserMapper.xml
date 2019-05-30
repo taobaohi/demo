@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.century21cn.userdemo.mapper.UserMapper">
+
+    <select id="getUserAll" resultType="com.century21cn.userdemo.entity.User">
+        select
+        *
+        from user
+    </select>
+
+    <select id="getUserByCondition" resultType="com.century21cn.userdemo.entity.User"
+            parameterType="com.century21cn.userdemo.entity.User">
+        select * from user
+        <where>
+            1=1
+            <if test="name !=null">
+                and name = #{name}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="getUserById" resultType="com.century21cn.userdemo.entity.User" parameterType="java.lang.Integer">
+        select * from user where userid = #{id}
+    </select>
+
+    <insert id="addUser" parameterType="com.century21cn.userdemo.entity.User">
+        insert into user(name, sex) values (#{name, jdbcType=VARCHAR}, #{sex, jdbcType=VARCHAR })
+    </insert>
+
+    <update id="updateUserById" parameterType="com.century21cn.userdemo.entity.User">
+        update user
+        <set>
+            <if test="name != null">
+                name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex, jdbcType=VARCHAR}
+            </if>
+            where userid = #{userid, jdbcType=INTEGER}
+        </set>
+    </update>
+
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+        delete from user where userid = #{id, jdbcType=INTEGER}
+    </delete>
+
+</mapper>
