@@ -1,6 +1,6 @@
 package com.century21cn.userdemo.service.impl;
 
-import com.century21cn.userdemo.entity.CodeEnum;
+import com.century21cn.userdemo.entity.MsgEnum;
 import com.century21cn.userdemo.entity.User;
 import com.century21cn.userdemo.entity.Wapper.OutputT;
 import com.century21cn.userdemo.mapper.UserMapper;
@@ -20,13 +20,13 @@ public class UserServiceImpl implements UserService {
     public OutputT<List<User>> getUserAll() throws Exception {
         var output = new OutputT<List<User>>();
         try {
-            output.setMsg(CodeEnum.SUCCESS.getMessage());
-            output.setCode(CodeEnum.SUCCESS);
+            output.setMsg(MsgEnum.SUCCESS.getName());
+            output.setCode(MsgEnum.SUCCESS.getId());
             var data = userMapper.getUserAll();
             output.setData(data);
         } catch (Exception e) {
-            output.setMsg(CodeEnum.SUCCESS.name());
-            output.setCode(CodeEnum.SUCCESS);
+            output.setMsg(MsgEnum.SUCCESS.name());
+            output.setCode(MsgEnum.SUCCESS.getId());
         }
         return output;
     }
@@ -35,13 +35,13 @@ public class UserServiceImpl implements UserService {
     public OutputT<List<User>> getUserByCondition(User user) throws Exception {
         var output = new OutputT<List<User>>();
         try {
-            output.setMsg(CodeEnum.SUCCESS.getMessage());
-            output.setCode(CodeEnum.SUCCESS);
+            output.setMsg(MsgEnum.SUCCESS.getName());
+            output.setCode(MsgEnum.SUCCESS.getId());
             var data = userMapper.getUserByCondition(user);
             output.setData(data);
         } catch (Exception ex) {
-            output.setCode(CodeEnum.ERROR);
-            output.setMsg(CodeEnum.ERROR.getMessage());
+            output.setCode(MsgEnum.ERROR.getId());
+            output.setMsg(MsgEnum.ERROR.getName());
         }
         return output;
     }
@@ -50,12 +50,12 @@ public class UserServiceImpl implements UserService {
     public OutputT<User> getUserById(Integer id) throws Exception {
         var output = new OutputT<User>();
         try {
-            output.setMsg(CodeEnum.SUCCESS.getMessage());
-            output.setCode(CodeEnum.SUCCESS);
+            output.setMsg(MsgEnum.SUCCESS.getName());
+            output.setCode(MsgEnum.SUCCESS.getId());
             output.setData(userMapper.getUserById(id));
         } catch (Exception ex) {
-            output.setCode(CodeEnum.ERROR);
-            output.setMsg(CodeEnum.ERROR.getMessage());
+            output.setCode(MsgEnum.ERROR.getId());
+            output.setMsg(MsgEnum.ERROR.getName());
         }
         return output;
     }
