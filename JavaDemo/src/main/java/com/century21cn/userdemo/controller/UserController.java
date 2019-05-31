@@ -1,6 +1,7 @@
 package com.century21cn.userdemo.controller;
 
 import com.century21cn.userdemo.entity.User;
+import com.century21cn.userdemo.entity.Wapper.OutputT;
 import com.century21cn.userdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +17,17 @@ public class UserController {
     @GetMapping("getUserAll")
 //    @PostMapping
 //    @RequestMapping(method = HttpMethod.)
-    public List<User> getUserAll() throws Exception {
+    public OutputT<List<User>> getUserAll() throws Exception {
         return userService.getUserAll();
     }
 
     @PostMapping("getUserByCondition")
-    public List<User> getUserByCondition(@RequestBody User user) throws Exception {
+    public OutputT<List<User>> getUserByCondition(@RequestBody User user) throws Exception {
         return userService.getUserByCondition(user);
     }
 
     @GetMapping("getUserById")
-    public User getUserById(Integer id) throws Exception {
+    public OutputT<User> getUserById(Integer id) throws Exception {
         return userService.getUserById(id);
     }
 

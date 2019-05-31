@@ -3,6 +3,8 @@ package com.century21cn.userdemo.service;
 import com.century21cn.userdemo.entity.User;
 
 import java.util.List;
+import  com.century21cn.userdemo.entity.Wapper.OutputT;
+
 
 public interface UserService {
 
@@ -12,9 +14,9 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    List<User> getUserAll() throws Exception;
+    OutputT<List<User>> getUserAll() throws Exception;
 
-    List<User> getUserByCondition(User user) throws Exception;
+    OutputT<List<User>> getUserByCondition(User user) throws Exception;
 
     /**
      * 根据用户id查询用户信息
@@ -23,7 +25,7 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    User getUserById(Integer id) throws Exception;
+    OutputT<User> getUserById(Integer id) throws Exception;
 
     /**
      * 新增用户
