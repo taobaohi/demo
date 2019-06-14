@@ -1,7 +1,5 @@
 package com.century21cn.userdemo.mapper;
 
-import com.century21cn.userdemo.entity.User;
-
 import java.util.List;
 
 public interface UserMapper {
