@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace DotnetDemo.Model
+namespace dotnetdemo.model
 {
 
     public enum CodeEnum

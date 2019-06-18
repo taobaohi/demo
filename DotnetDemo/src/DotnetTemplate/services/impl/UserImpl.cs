@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DotnetDemo.Model;
+using dotnetdemo.model;
 
 using Dapper;
 using MySql;
@@ -11,7 +11,7 @@ using System.Data;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 
-namespace DotnetDemo.Service
+namespace dotnetdemo.Service
 {
     public class UserImpl : IUser
     {
@@ -43,14 +43,14 @@ namespace DotnetDemo.Service
             {
                 using (MysqlConn)
                 {
-                    output.code = Model.CodeEnum.Success;
-                    output.msg = Model.CodeEnum.Success.Description();
+                    output.code = model.CodeEnum.Success;
+                    output.msg = model.CodeEnum.Success.Description();
                     output.data= MysqlConn.Execute(@"insert  into `user`(name, sex) values (@name, @sex)", user);
                 }
             }
             catch(Exception ex)
             {
-                output.code = Model.CodeEnum.Error;
+                output.code = model.CodeEnum.Error;
 #if DEBUG
                 output.msg = ex.ToString();
 #else
@@ -69,14 +69,14 @@ namespace DotnetDemo.Service
             {
                 using (MysqlConn)
                 {
-                    output.code = Model.CodeEnum.Success;
-                    output.msg = Model.CodeEnum.Success.Description();
+                    output.code = model.CodeEnum.Success;
+                    output.msg = model.CodeEnum.Success.Description();
                     output.data = MysqlConn.Execute(@"update user set name=@name, sex=@sex where userid=@userid", user);
                 }
             }
             catch (Exception ex)
             {
-                output.code = Model.CodeEnum.Error;
+                output.code = model.CodeEnum.Error;
 #if DEBUG
                 output.msg = ex.ToString();
 #else
@@ -93,14 +93,14 @@ namespace DotnetDemo.Service
             {
                 using (MysqlConn)
                 {
-                    output.code = Model.CodeEnum.Success;
-                    output.msg = Model.CodeEnum.Success.Description();
+                    output.code = model.CodeEnum.Success;
+                    output.msg = model.CodeEnum.Success.Description();
                     output.data = MysqlConn.Execute($"delete from user where userid={id}");
                 }
             }
             catch (Exception ex)
             {
-                output.code = Model.CodeEnum.Error;
+                output.code = model.CodeEnum.Error;
 #if DEBUG
                 output.msg = ex.ToString();
 #else
@@ -117,13 +117,13 @@ namespace DotnetDemo.Service
             {
                 using (MysqlConn)
                 {
-                    output.code = Model.CodeEnum.Success;
+                    output.code = model.CodeEnum.Success;
                     
                     var users = MysqlConn.Query<User>($"select * from  user where userid={id}").ToArray();
                     if (users.Count() > 0)
                     {
                         output.data = users[0];
-                        output.msg = Model.CodeEnum.Success.Description();
+                        output.msg = model.CodeEnum.Success.Description();
                     }
                     else
                     {
@@ -133,7 +133,7 @@ namespace DotnetDemo.Service
             }
             catch (Exception ex)
             {
-                output.code = Model.CodeEnum.Error;
+                output.code = model.CodeEnum.Error;
 #if DEBUG
                 output.msg = ex.ToString();
 #else
@@ -151,13 +151,13 @@ namespace DotnetDemo.Service
                 using (MysqlConn)
                 {
                     output.data = MysqlConn.Query<User>($"SELECT * FROM `user`").ToList();
-                    output.code = Model.CodeEnum.Success;
-                    output.msg = Model.CodeEnum.Success.Description();
+                    output.code = model.CodeEnum.Success;
+                    output.msg = model.CodeEnum.Success.Description();
                 }
             }
             catch (Exception ex)
             {
-                output.code = Model.CodeEnum.Error;
+                output.code = model.CodeEnum.Error;
 #if DEBUG
                 output.msg = ex.ToString();
 #else
