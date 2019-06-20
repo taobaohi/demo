@@ -1,13 +1,13 @@
-﻿using dotnetdemo.model.dto.comm;
+﻿using servicedemo.models.dto.comm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dotnetdemo.model.dto.wapper
+namespace servicedemo.models.dto.wapper
 {
-    public class TPageRequest<TData>
+    public class PageRequestT<TData>
     {
         /// <summary>
         /// 区域编码

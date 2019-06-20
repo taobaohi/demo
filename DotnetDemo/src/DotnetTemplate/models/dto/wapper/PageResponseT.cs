@@ -1,13 +1,21 @@
 ﻿
 using System.Collections.Generic;
 
-namespace dotnetdemo.model.dto.wapper
+namespace servicedemo.models.dto.wapper
 {
-    using dotnetdemo.enums;
-    using dotnetdemo.model.dto.comm;
+    using servicedemo.enums;
+    using servicedemo.models.dto.comm;
 
-    public class TPageResponse<TData>
+    public class PageResponseT<TData>
     {
+        /// <summary>
+        /// 构造默认值
+        /// </summary>
+       public PageResponseT()
+        {
+            code = CodeEnum.Success;
+            msg = CodeEnum.Success.Description();
+        }
 
         /// <summary>
         /// 返回代码

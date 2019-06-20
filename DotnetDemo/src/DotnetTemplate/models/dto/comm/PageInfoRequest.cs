@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace dotnetdemo.model.dto.comm
+namespace servicedemo.models.dto.comm
 {
     public class PageInfoRequest
     {

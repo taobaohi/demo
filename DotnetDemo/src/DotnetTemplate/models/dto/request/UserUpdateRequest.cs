@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dotnetdemo.model.dto.request
+namespace servicedemo.models.dto.request
 {
     public class UserUpdate
     {

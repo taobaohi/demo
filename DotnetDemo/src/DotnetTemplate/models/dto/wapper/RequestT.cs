@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dotnetdemo.model.dto.wapper
+namespace servicedemo.models.dto.wapper
 {
-    public class TRequest<TData>
+    public class RequestT<TData>
     {
         /// <summary>
         /// 区域编码
@@ -23,6 +23,6 @@ namespace dotnetdemo.model.dto.wapper
         /// <summary>
         /// 筛选条件
         /// </summary>
-        public TData filterData { get; set; }
+        public TData data { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace dotnetdemo.enums
+namespace servicedemo.enums
 {
     public static class Extension
     {

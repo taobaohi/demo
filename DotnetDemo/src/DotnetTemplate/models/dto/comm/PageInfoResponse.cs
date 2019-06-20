@@ -1,4 +1,4 @@
-﻿namespace dotnetdemo.model.dto.comm
+﻿namespace servicedemo.models.dto.comm
 {
     public class PageInfoResponse
     {

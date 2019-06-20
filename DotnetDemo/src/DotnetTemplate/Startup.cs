@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace dotnetdemo
+namespace servicedemo
 {
     public class Startup
     {
@@ -28,29 +28,29 @@ namespace dotnetdemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             // 配置文件映射
-            services.Configure<AppSetting>(Configuration);
-
+            services.Configure<AppSettings>(Configuration);
             // service 注入
-            services.AddTransient<Service.IUser, Service.UserImpl>();
-
+            services.AddTransient<services.IUser, services.UserImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
             //else
             //{
             //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             //    app.UseHsts();
             //}
-
             //app.UseHttpsRedirection();
+
+            // enable "Generic exception middleware"
+            app.UseExceptionHandler();
+
             app.UseMvc();
         }
     }

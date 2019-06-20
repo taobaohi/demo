@@ -1,55 +1,66 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using dotnetdemo.model;
-using Microsoft.AspNetCore.Mvc;
 
-namespace dotnetdemo.Controllers
+namespace servicedemo.Controllers
 {
+    using servicedemo.models.dto.wapper;
+    using servicedemo.models.dto.request;
+    using servicedemo.models.dto.response;
+    using servicedemo.services;
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly Service.IUser _user;
-        public UserController(Service.IUser user)
+        private readonly IUser _user;
+        public UserController(IUser user)
         {
             _user = user;
         }
 
-        // GET api/values
         [HttpGet]
-        public Wapper.OutputT<IEnumerable<model.User>> Get()
+        public PageResponseT<UserList> GetFilter(PageRequestT<UserFilter> pageRequest)
         {
-            return _user.GetAll();
+            return _user.GetFilter(pageRequest);
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
-        public Wapper.OutputT<model.User> Get(int id)
+        public ResponseT<UserDetail> Get(int id)
         {
             return  _user.GetById(id);
         }
 
-        // POST api/values
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>用户Id</returns>
         [HttpPost]
-        public Wapper.OutputT<int> Create([FromBody] model.User user)
+        public ResponseT<long> Create([FromBody] RequestT<UserAdd> request)
         {
-            return _user.Create(user);
+            return _user.Create(request);
         }
 
-        // PUT api/values/5
-        [HttpPut]
-        public Wapper.OutputT<int> Edit([FromBody] model.User user)
+        /// <summary>
+        /// 修改用户
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>影响行数</returns>
+        [HttpPost]
+        public ResponseT<int> Edit([FromBody] RequestT<UserUpdate> request)
         {
-            return _user.Edit(user);
+            return _user.Edit(request);
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public Wapper.OutputT<int> Delete(int id)        
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>影响行数</returns>
+        [HttpPost]
+        public ResponseT<int> Delete(RequestT<UserDelete> request)        
         {
-            return _user.Delete(id);
+            return _user.Delete(request);
         }
     }
 }

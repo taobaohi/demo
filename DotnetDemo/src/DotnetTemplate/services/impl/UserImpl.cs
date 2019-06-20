@@ -1,29 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using dotnetdemo.model;
-
-using Dapper;
-using MySql;
-using MySql.Data.MySqlClient;
-using System.Data;
-using Microsoft.Extensions.Options;
+﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
-namespace dotnetdemo.Service
+namespace servicedemo.services
 {
+    using models.dto.request;
+    using models.dto.response;
+    using models.dto.wapper;
+
     public class UserImpl : IUser
     {
         // https://github.com/StackExchange/Dapper
 
         IDbConnection MysqlConn;
 
-        private readonly IOptionsSnapshot<AppSetting> _settings;
-        public UserImpl(IOptionsSnapshot<AppSetting> settings)
+        private readonly AppSettings _settings;
+        public UserImpl(IOptionsSnapshot<AppSettings> settings)
         {
-            _settings = settings;
-            MysqlConn = new MySqlConnection(_settings.Value.connectionStrings.MySqlDemo);
+            _settings = settings.Value;
+            MysqlConn = new MySqlConnection(_settings.connectionStrings.MySqlDemo);
             MysqlConn.Open();
         }
 
@@ -34,137 +33,65 @@ namespace dotnetdemo.Service
             MysqlConn = new MySqlConnection(Configuration.GetConnectionString("MsSqlDemo"));
             MysqlConn.Open();
         }
-       
 
-        public Wapper.OutputT<int> Create(User user)
+        public ResponseT<long> Create(RequestT<UserAdd> userAdd)
         {
-            var output = new Wapper.OutputT<int>();
-            try
+            var response = new ResponseT<long>();
+            using (MysqlConn)
             {
-                using (MysqlConn)
-                {
-                    output.code = model.CodeEnum.Success;
-                    output.msg = model.CodeEnum.Success.Description();
-                    output.data= MysqlConn.Execute(@"insert  into `user`(name, sex) values (@name, @sex)", user);
-                }
+                response.data = MysqlConn.Execute(@"insert  into `user`(name, sex) values (@name, @sex)", userAdd.data);
             }
-            catch(Exception ex)
-            {
-                output.code = model.CodeEnum.Error;
-#if DEBUG
-                output.msg = ex.ToString();
-#else
-                output.msg = Model.CodeEnum.Error.Description();
-#endif
-            }
-            return output;
+            return response;
         }
 
-
-
-        Wapper.OutputT<int> IUser.Edit(User user)
+        public ResponseT<int> Edit(RequestT<UserUpdate> userUpdate)
         {
-            var output = new Wapper.OutputT<int>();
-            try
+            var response = new ResponseT<int>();
+            using (MysqlConn)
             {
-                using (MysqlConn)
-                {
-                    output.code = model.CodeEnum.Success;
-                    output.msg = model.CodeEnum.Success.Description();
-                    output.data = MysqlConn.Execute(@"update user set name=@name, sex=@sex where userid=@userid", user);
-                }
+                response.data = MysqlConn.Execute(@"update user set name=@name, sex=@sex where userid=@userid", userUpdate);
             }
-            catch (Exception ex)
-            {
-                output.code = model.CodeEnum.Error;
-#if DEBUG
-                output.msg = ex.ToString();
-#else
-                output.msg = Model.CodeEnum.Error.Description();
-#endif
-            }
-            return output;
+
+            return response;
         }
 
-        Wapper.OutputT<int> IUser.Delete(int id)
+        public ResponseT<int> Delete(RequestT<UserDelete> userDelete)
         {
-            var output = new Wapper.OutputT<int>();
-            try
+            var response = new ResponseT<int>();
+            using (MysqlConn)
             {
-                using (MysqlConn)
-                {
-                    output.code = model.CodeEnum.Success;
-                    output.msg = model.CodeEnum.Success.Description();
-                    output.data = MysqlConn.Execute($"delete from user where userid={id}");
-                }
+                response.data = MysqlConn.Execute($"delete from user where userid=@ids", userDelete.data);
             }
-            catch (Exception ex)
-            {
-                output.code = model.CodeEnum.Error;
-#if DEBUG
-                output.msg = ex.ToString();
-#else
-                output.msg = Model.CodeEnum.Error.Description();
-#endif
-            }
-            return output;
+
+            return response;
         }
 
-        Wapper.OutputT<User> IUser.GetById(int id)
+        public ResponseT<UserDetail> GetById(long id)
         {
-            var output = new Wapper.OutputT<User>();
-            try
+            var response = new ResponseT<UserDetail>();
+            using (MysqlConn)
             {
-                using (MysqlConn)
+                var users = MysqlConn.Query<UserDetail>($"select * from  user where userid={id}").ToArray();
+                if (users.Count() > 0)
                 {
-                    output.code = model.CodeEnum.Success;
-                    
-                    var users = MysqlConn.Query<User>($"select * from  user where userid={id}").ToArray();
-                    if (users.Count() > 0)
-                    {
-                        output.data = users[0];
-                        output.msg = model.CodeEnum.Success.Description();
-                    }
-                    else
-                    {
-                        output.msg = "no data";
-                    }
+                    response.data = users[0];
+                }
+                else
+                {
+                    response.msg = "no data";
                 }
             }
-            catch (Exception ex)
-            {
-                output.code = model.CodeEnum.Error;
-#if DEBUG
-                output.msg = ex.ToString();
-#else
-                output.msg = Model.CodeEnum.Error.Description();
-#endif
-            }
-            return output;
+            return response;
         }
 
-        Wapper.OutputT<IEnumerable<User>> IUser.GetAll()
+        public PageResponseT<UserList> GetFilter(PageRequestT<UserFilter> userFilter)
         {
-            var output = new Wapper.OutputT<IEnumerable<User>>();
-            try
+            var response = new PageResponseT<UserList>();
+            using (MysqlConn)
             {
-                using (MysqlConn)
-                {
-                    output.data = MysqlConn.Query<User>($"SELECT * FROM `user`").ToList();
-                    output.code = model.CodeEnum.Success;
-                    output.msg = model.CodeEnum.Success.Description();
-                }
+                response.dataList = MysqlConn.Query<UserList>($"SELECT * FROM `user`").ToList();
             }
-            catch (Exception ex)
-            {
-                output.code = model.CodeEnum.Error;
-#if DEBUG
-                output.msg = ex.ToString();
-#else
-                output.msg = Model.CodeEnum.Error.Description();
-#endif
-            }
-            return output;
+            return response;
         }
     }
 }

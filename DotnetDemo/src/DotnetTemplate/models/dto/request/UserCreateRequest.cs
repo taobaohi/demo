@@ -1,6 +1,6 @@
-﻿namespace dotnetdemo.model.dto.request
+﻿namespace servicedemo.models.dto.request
 {
-    public class UserAddRequest
+    public class UserAdd
     {
         /// <summary>
         ///  姓名

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dotnetdemo.model.dto.response
+namespace servicedemo.models.dto.response
 {
-    public class UserResponse
+    public class UserDetail
     {
         /// <summary>
         /// id

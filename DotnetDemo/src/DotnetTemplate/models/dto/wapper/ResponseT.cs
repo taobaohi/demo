@@ -1,11 +1,21 @@
 ﻿
+using System.Collections.Generic;
 
-namespace dotnetdemo.model.dto.wapper
+namespace servicedemo.models.dto.wapper
 {
-    using dotnetdemo.enums;
+    using servicedemo.enums;
 
-    public class TResponse<TData>
+    public class ResponseT<TData>
     {
+        /// <summary>
+        /// 构造默认值
+        /// </summary>
+        public ResponseT()
+        {
+            code = CodeEnum.Success;
+            msg = CodeEnum.Success.Description();
+        }
+
         /// <summary>
         /// 返回代码
         /// </summary>
