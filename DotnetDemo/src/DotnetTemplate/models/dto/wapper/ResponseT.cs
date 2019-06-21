@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace servicedemo.models.dto.wapper
 {
+    using Microsoft.AspNetCore.Http;
     using servicedemo.enums;
 
     public class ResponseT<TData>
@@ -26,6 +27,7 @@ namespace servicedemo.models.dto.wapper
         /// </summary>
         public string msg { get; set; }
 
+ 
         /// <summary>
         /// 通用返回数据
         /// </summary>

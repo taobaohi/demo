@@ -9,6 +9,14 @@ namespace servicedemo.Controllers
     using servicedemo.services;
     using System;
 
+
+    public class Rootobject
+    {
+        public int c { get; set; }
+        public int d { get; set; }
+    }
+
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -42,6 +50,14 @@ namespace servicedemo.Controllers
             return _user.Create(request);
         }
 
+        [HttpPost]
+        public ResponseT<long> PostTest([FromBody] Rootobject rootobject)
+        {
+            var aaa = rootobject;
+            int.Parse("a");
+            return null;
+        }
+
         /// <summary>
         /// 修改用户
         /// </summary>
@@ -59,7 +75,7 @@ namespace servicedemo.Controllers
         /// <param name="request"></param>
         /// <returns>影响行数</returns>
         [HttpPost]
-        public ResponseT<int> Delete(RequestT<UserDelete> request)        
+        public ResponseT<int> Delete(RequestT<UserDelete> request)
         {
             return _user.Delete(request);
         }

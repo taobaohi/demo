@@ -60,7 +60,8 @@ namespace servicedemo
             //app.UseHttpsRedirection();
 
             // 中间件统一错误处理
-            app.UseGloablExceptionMiddleware();
+            //app.UseGloablExceptionMiddleware();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseMvc();
         }
