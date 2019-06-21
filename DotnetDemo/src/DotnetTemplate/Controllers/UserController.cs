@@ -7,6 +7,7 @@ namespace servicedemo.Controllers
     using servicedemo.models.dto.request;
     using servicedemo.models.dto.response;
     using servicedemo.services;
+    using System;
 
     [Route("api/[controller]/[action]")]
     [ApiController]
@@ -27,7 +28,7 @@ namespace servicedemo.Controllers
         [HttpGet("{id}")]
         public ResponseT<UserDetail> Get(int id)
         {
-            return  _user.GetById(id);
+            return _user.GetById(id);
         }
 
         /// <summary>

@@ -22,17 +22,17 @@ namespace servicedemo.services
         public UserImpl(IOptionsSnapshot<AppSettings> settings)
         {
             _settings = settings.Value;
-            MysqlConn = new MySqlConnection(_settings.connectionStrings.MySqlDemo);
-            MysqlConn.Open();
+            MysqlConn = new MySqlConnection(_settings.ConnectionStrings.MySqlDemo);
+         //   MysqlConn.Open();
         }
 
-        public IConfiguration Configuration { get; }
-        public UserImpl(IConfiguration configuration)
-        {
-            Configuration = configuration;
-            MysqlConn = new MySqlConnection(Configuration.GetConnectionString("MsSqlDemo"));
-            MysqlConn.Open();
-        }
+        //public IConfiguration Configuration { get; }
+        //public UserImpl(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //    MysqlConn = new MySqlConnection(Configuration.GetConnectionString("MsSqlDemo"));
+        //    MysqlConn.Open();
+        //}
 
         public ResponseT<long> Create(RequestT<UserAdd> userAdd)
         {
@@ -68,6 +68,7 @@ namespace servicedemo.services
 
         public ResponseT<UserDetail> GetById(long id)
         {
+           // System.IO.File.Create("f:/aaa.xyz");
             var response = new ResponseT<UserDetail>();
             using (MysqlConn)
             {

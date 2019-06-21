@@ -29,7 +29,7 @@ namespace servicedemo.middleware
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong: {ex.Message}");
+                _logger.LogError($"Something went wrong: {ex.ToString()}");
                 await HandleGlobalExceptionAsync(httpContext, ex);
             }
         }
@@ -38,15 +38,17 @@ namespace servicedemo.middleware
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            return context.Response.WriteAsync(new ResponseT<string>
-            {
-                code = servicedemo.enums.CodeEnum.Error, //context.Response.StatusCode
+            return context.Response.WriteAsync(
+                new ResponseT<string>
+                {
+                    code = enums.CodeEnum.Error, //context.Response.StatusCode
 #if DEBUG
-                msg = exception.ToString()
+                    msg = exception.ToString()
 #else
-                msg= "Something went wrong !Internal Server Error"
+                    msg= "Something went wrong !Internal Server Error"
 #endif
-            }.ToString()); ; ; ;
+                }.ToString()
+            );
         }
     }
 }

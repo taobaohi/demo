@@ -35,9 +35,9 @@ namespace servicedemo.models.dto.wapper
         /// 对象序列化
         /// </summary>
         /// <returns></returns>
-        public string Tostring()
+        public override string ToString()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
     }
 }

@@ -19,9 +19,14 @@ namespace servicedemo
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-             .UseStartup<Startup>()
+            //.ConfigureLogging((hostingContext, logging) =>
+            //{
+            //    logging.AddConsole();
+            //    logging.AddDebug();
+            //})
+            .UseStartup<Startup>()
 #if RELEASE
-             .UseUrls("http://+:80")
+            .UseUrls("http://+:80")
 #endif
             ;
     }

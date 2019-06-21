@@ -10,11 +10,11 @@ namespace servicedemo
         /// <summary>
         /// service 数据库连接
         /// </summary>
-        public ConnectionStrings connectionStrings { get; set; }
+        public ConnectionStrings ConnectionStrings { get; set; }
         /// <summary>
         /// client 服务发现
         /// </summary>
-        public ServiceDiscovery serviceDiscovery { get; set; }
+        public ServiceDiscovery ServiceDiscovery { get; set; }
     }
 
     /// <summary>

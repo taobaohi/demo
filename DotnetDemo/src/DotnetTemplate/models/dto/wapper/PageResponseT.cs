@@ -37,5 +37,9 @@ namespace servicedemo.models.dto.wapper
         /// </summary>
         public PageInfoResponse pageData { get; set; }
 
+        public override string ToString()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
     }
 }

@@ -24,5 +24,10 @@ namespace servicedemo.models.dto.wapper
         /// 分页数据
         /// </summary>
         public PageInfoRequest pageData { get; set; }
+
+        public override string ToString()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
     }
 }

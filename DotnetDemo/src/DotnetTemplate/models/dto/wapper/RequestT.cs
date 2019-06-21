@@ -24,5 +24,10 @@ namespace servicedemo.models.dto.wapper
         /// 筛选条件
         /// </summary>
         public TData data { get; set; }
+
+        public override string ToString()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
     }
 }
