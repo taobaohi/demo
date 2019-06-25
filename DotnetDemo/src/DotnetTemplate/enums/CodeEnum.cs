@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace servicedemo.enums
+namespace enums
 {
     public enum CodeEnum
     {

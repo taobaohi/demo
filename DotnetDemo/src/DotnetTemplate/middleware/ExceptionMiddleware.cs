@@ -1,18 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 
-// https://thecodebuzz.com/best-practices-for-handling-exception-in-net-core-2-1/
-
+/// <summary>
+/// 参考:https://thecodebuzz.com/best-practices-for-handling-exception-in-net-core-2-1/
+/// https://thecodebuzz.com/filters-in-net-core-best-practices/
+/// </summary>
 namespace servicedemo.middleware
 {
     using servicedemo.models.dto.comm;
-    using System.IO;
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Formatters.Binary;
 
     public class ExceptionMiddleware
     {
@@ -43,7 +45,6 @@ namespace servicedemo.middleware
             object requestData = null;
             if (context.Request.Method=="POST" && context.Request.Body.Length>0)
             {
-                //requestData = DeserializeFromStream(context.Request.Body);
                 using (var reader = new System.IO.StreamReader(context.Request.Body, System.Text.Encoding.UTF8))
                 {
                     context.Request.Body.Position = 0;
@@ -65,29 +66,12 @@ namespace servicedemo.middleware
 #if DEBUG
                     msg = $"{exception.Message}:{exception.StackTrace}"
 #else
-                    msg= "Something went wrong !Internal Server Error"
+                    //msg= "Something went wrong !Internal Server Error"
+                    msg = $"{exception.Message}:{exception.StackTrace}"
 #endif
                 }.ToString()
             ); ;
         }
-
-        public static object DeserializeFromStream(Stream stream)
-        {
-            try
-            {
-                IFormatter formatter = new BinaryFormatter();
-                stream.Seek(0, SeekOrigin.Begin);
-                stream.Position = 0;
-                object o = formatter.Deserialize(stream);
-                return o;
-            }
-            catch(Exception ex)
-            {
-                var aa = ex;
-                return null;
-            }
-        }
-            
 
     }
 }
