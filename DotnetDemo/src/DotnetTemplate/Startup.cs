@@ -7,11 +7,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace servicedemo
 {
+    using CSRedis;
+    using Microsoft.Extensions.Caching.Distributed;
     using middleware;
-
     public class Startup
     {
-
         // 构造函数注入
         public Startup(IConfiguration configuration)
         {
@@ -31,11 +31,20 @@ namespace servicedemo
                 //}
              )
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             // 配置文件映射
             services.Configure<AppSettings>(Configuration);
-            // service 注入
+
+            #region RedisHelper
+            var csredis = new CSRedisClient(Configuration.GetConnectionString("RedisConn"));
+            //初始化 RedisHelper
+            RedisHelper.Initialization(csredis);
+            //注册mvc分布式缓存(eg:把Session存到Redis,kube部署后多台轮询需要统一存储session)
+            services.AddSingleton<IDistributedCache>(new Microsoft.Extensions.Caching.Redis.CSRedisCache(RedisHelper.Instance));
+            #endregion
+
+            #region service 注入
             services.AddTransient<services.IUser, services.UserImpl>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +64,6 @@ namespace servicedemo
             // 中间件统一错误处理
             //app.UseGloablExceptionMiddleware();
             app.UseMiddleware<ExceptionMiddleware>();
-
             app.UseMvc();
         }
     }

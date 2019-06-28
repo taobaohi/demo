@@ -9,8 +9,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 
 /// <summary>
-/// 参考:https://thecodebuzz.com/best-practices-for-handling-exception-in-net-core-2-1/
-/// https://thecodebuzz.com/filters-in-net-core-best-practices/
+/// 统一异常处理
+/// 参考:https://thecodebuzz.com/best-practices-for-handling-exception-in-net-core-2-1/   https://thecodebuzz.com/filters-in-net-core-best-practices/
+/// 
+/// 1.不能完全依赖:被统一异常处理拦截后，本次Request的整个任务就终止了，所以还是需要处理需要跳过的异常。
+/// 2.消费其他服务(Client)的异常:无法拦截Client请求提交的数据，只能拦截Request的输入数据。
+/// 3.链路追踪
+/// 4.全链路监控(APM)：https://github.com/SkyAPM/SkyAPM-dotnet
 /// </summary>
 namespace servicedemo.middleware
 {
@@ -37,7 +42,6 @@ namespace servicedemo.middleware
                 await HandleGlobalExceptionAsync(httpContext, ex);
             }
         }
-
         private static Task HandleGlobalExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";

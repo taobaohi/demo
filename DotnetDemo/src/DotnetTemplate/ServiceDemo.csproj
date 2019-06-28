@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Caching.CSRedis" Version="3.0.51" />
+    <PackageReference Include="CSRedisCore" Version="3.0.62" />
     <PackageReference Include="Dapper" Version="1.60.6" />
     <PackageReference Include="Flurl.Http" Version="2.4.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -19,7 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="models\dto\user\" />
+    <Folder Include="kubernetes\dockerfile\" />
+    <Folder Include="kubernetes\jenkins\" />
+    <Folder Include="kubernetes\yaml\Service\" />
+    <Folder Include="kubernetes\yaml\Deployment\" />
+    <Folder Include="kubernetes\yaml\Ingress\" />
+    <Folder Include="kubernetes\yaml\CronJob\" />
   </ItemGroup>
 
 </Project>
