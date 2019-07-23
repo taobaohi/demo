@@ -1,4 +1,7 @@
-﻿
+﻿## 命名
+https://blog.csdn.net/bob_dadoudou/article/details/79476612
+文件夹名参考了golang，包名用小写。
+
 ## 读取配置
 1.实体注入
  - AppSettings.cs

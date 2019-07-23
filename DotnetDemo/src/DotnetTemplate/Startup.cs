@@ -12,13 +12,16 @@ namespace servicedemo
     using middleware;
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         // 构造函数注入
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
 
-        public IConfiguration Configuration { get; }
+            // 初始化RedisHelper
+            var residConn = Configuration["ConnectionStrings:RedisConn"].ToString();
+            RedisHelper.Initialization(new CSRedisClient(residConn));
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)

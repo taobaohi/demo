@@ -21,12 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="clients\kooboss\impl\" />
+    <Folder Include="clients\kooboss\models\" />
     <Folder Include="kubernetes\dockerfile\" />
     <Folder Include="kubernetes\jenkins\" />
     <Folder Include="kubernetes\yaml\Service\" />
-    <Folder Include="kubernetes\yaml\Deployment\" />
     <Folder Include="kubernetes\yaml\Ingress\" />
-    <Folder Include="kubernetes\yaml\CronJob\" />
   </ItemGroup>
 
 </Project>
