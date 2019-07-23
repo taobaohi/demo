@@ -10,10 +10,10 @@ namespace servicedemo.clients
     /// 服务发现
     /// 服务的地址可以存于consul、appconfig、redis、configmap。
     /// </summary>
-    public  class ServiceDiscovery
+    public  class ServiceDiscoveryImpl: ServiceDiscovery
     {
         private readonly IConfiguration Configuration;
-        ServiceDiscovery(IConfiguration configuration)
+        ServiceDiscoveryImpl(IConfiguration configuration)
         {
             Configuration = configuration;
         }
