@@ -10,6 +10,7 @@ https://blog.csdn.net/bob_dadoudou/article/details/79476612
 >
 服务消费者代码都按照提供方分别放在client文件夹，因为不同提供方命名规范不同，接口风格不同，并且做为消费者无法改变，只能被动接受。
 
+# 模块
 ## 读取配置
 1.实体注入
  - AppSettings.cs
@@ -23,10 +24,20 @@ https://blog.csdn.net/bob_dadoudou/article/details/79476612
 	}
   	```
 	```
-	    private readonly AppSettings _settings;
+       private readonly AppSettings _settings;
         public UserImpl(IOptionsSnapshot<AppSettings> settings)
         {
             _settings = settings.Value;
         }
 	```
 ## GlobalException统一错误处理
+
+## redis
+
+## swagger
+
+## mq
+
+## elasticsearch
+
+	
