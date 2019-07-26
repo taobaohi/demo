@@ -10,7 +10,7 @@ namespace servicedemo.services
 {
     using models.dto.request;
     using models.dto.response;
-    using models.dto.wapper;
+    using models.dto.wrapper;
 
     public class UserImpl : IUser
     {
@@ -68,7 +68,7 @@ namespace servicedemo.services
 
         public ResponseT<UserDetail> GetById(long id)
         {
-            System.IO.File.Create("f:/aaa.xyz");
+         //   System.IO.File.Create("f:/aaa.xyz");
             var response = new ResponseT<UserDetail>();
             using (MysqlConn)
             {

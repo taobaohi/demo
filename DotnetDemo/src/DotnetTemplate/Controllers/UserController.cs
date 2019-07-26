@@ -3,20 +3,12 @@ using System.Collections.Generic;
 
 namespace servicedemo.Controllers
 {
-    using servicedemo.models.dto.wapper;
+    using servicedemo.models.dto.wrapper;
     using servicedemo.models.dto.request;
     using servicedemo.models.dto.response;
     using servicedemo.services;
     using System;
-
-
-    public class Rootobject
-    {
-        public int c { get; set; }
-        public int d { get; set; }
-    }
-
-
+    
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -49,15 +41,7 @@ namespace servicedemo.Controllers
         {
             return _user.Create(request);
         }
-
-        [HttpPost]
-        public ResponseT<long> PostTest([FromBody] Rootobject rootobject)
-        {
-            var aaa = rootobject;
-            int.Parse("a");
-            return null;
-        }
-
+        
         /// <summary>
         /// 修改用户
         /// </summary>

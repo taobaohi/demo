@@ -1,17 +1,13 @@
-﻿
-using System.Collections.Generic;
-
-namespace servicedemo.models.dto.wapper
+﻿namespace servicedemo.models.dto.wrapper
 {
-    using servicedemo.enums;
-    using servicedemo.models.dto.comm;
+    using enums;
 
-    public class PageResponseT<TData>
+    public class ResponseT<TData>
     {
         /// <summary>
         /// 构造默认值
         /// </summary>
-       public PageResponseT()
+        public ResponseT()
         {
             code = CodeEnum.Success;
             msg = CodeEnum.Success.Description();
@@ -27,16 +23,16 @@ namespace servicedemo.models.dto.wapper
         /// </summary>
         public string msg { get; set; }
 
+ 
         /// <summary>
         /// 通用返回数据
         /// </summary>
-        public IEnumerable<TData> dataList { get; set; }
+        public TData data { get; set; }
 
         /// <summary>
-        /// 分页数据
+        /// 对象序列化
         /// </summary>
-        public PageInfoResponse pageData { get; set; }
-
+        /// <returns></returns>
         public override string ToString()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
