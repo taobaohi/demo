@@ -3,7 +3,7 @@
 >
 参考了Java和Golang包名都是小写。
 https://blog.csdn.net/bob_dadoudou/article/details/79476612
-## 接口与实现的命名
+## 接口不以大写I开头
 >
 在构造注入时只写接口名称，不写接口实现名称，若接口用I开始，每次都要先写一个与业务无关的I有点累赘，所以参考了Java的命名。
 ## client文件夹
