@@ -13,8 +13,8 @@ namespace servicedemo.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUser _user;
-        public UserController(IUser user)
+        private readonly User _user;
+        public UserController(User user)
         {
             _user = user;
         }

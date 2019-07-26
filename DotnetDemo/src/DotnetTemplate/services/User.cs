@@ -7,7 +7,7 @@ namespace servicedemo.services
     using models.dto.request;
     using models.dto.response;
 
-    public interface IUser
+    public interface User
     {
         ResponseT<long> Create(RequestT<UserAdd> userAdd);
         ResponseT<int> Edit(RequestT<UserUpdate> userUpdate);

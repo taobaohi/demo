@@ -46,7 +46,7 @@ namespace servicedemo
             #endregion
 
             #region service 注入
-            services.AddTransient<services.IUser, services.UserImpl>();
+            services.AddTransient<services.User, services.UserImpl>();
             #endregion
         }
 

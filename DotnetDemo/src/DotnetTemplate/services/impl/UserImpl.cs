@@ -12,7 +12,7 @@ namespace servicedemo.services
     using models.dto.response;
     using models.dto.wrapper;
 
-    public class UserImpl : IUser
+    public class UserImpl : User
     {
         // https://github.com/StackExchange/Dapper
 
