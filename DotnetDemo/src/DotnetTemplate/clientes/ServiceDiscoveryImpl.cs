@@ -22,7 +22,7 @@ namespace servicedemo.clients
         /// koofang service host
         /// </summary>
         /// <returns></returns>
-        public string getKoofangService()
+        public string GetKoofangService()
         {
             return getKoofangServiceByCfg();
         }

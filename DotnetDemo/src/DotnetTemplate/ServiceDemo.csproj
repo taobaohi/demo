@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="clients\kooboss\impl\" />
-    <Folder Include="clients\kooboss\models\" />
+    <Folder Include="clientes\kooboss\impl\" />
+    <Folder Include="clientes\kooboss\models\" />
     <Folder Include="kubernetes\dockerfile\" />
     <Folder Include="kubernetes\jenkins\" />
     <Folder Include="kubernetes\yaml\Service\" />

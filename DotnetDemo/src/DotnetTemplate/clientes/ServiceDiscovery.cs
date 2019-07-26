@@ -7,6 +7,6 @@ namespace servicedemo.clients
 {
     interface ServiceDiscovery
     {
-        string getKoofangService();
+        string GetKoofangService();
     }
 }
