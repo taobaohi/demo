@@ -11,10 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="middleware\ExceptionHandlerMiddleware.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Caching.CSRedis" Version="3.0.51" />
     <PackageReference Include="CSRedisCore" Version="3.0.62" />
     <PackageReference Include="Dapper" Version="1.60.6" />
